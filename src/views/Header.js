@@ -1,13 +1,12 @@
 import React from "react";
 import SearchBar from "../components/SearchBar";
 
-const Search = () => {
+const Header = () => {
   return (
-    <div>
-      <h1>Search</h1>
+    <div className="header">
       <SearchBar />
     </div>
   );
 };
 
-export default Search;
+export default Header;

@@ -1,14 +1,12 @@
 import React from "react";
-import Profile from "../views/Profile";
-import Search from "../views/Search";
-import Diet from "../views/Diet";
+import Header from "../views/Header";
+import MainContent from "../views/MainContent";
 
 const App = () => {
   return (
     <>
-      <Search />
-      <Profile />
-      <Diet />
+      <Header />
+      <MainContent />
     </>
   );
 };
