@@ -1,15 +1,23 @@
 import React from "react";
+import diet from "../../data/mock-data";
 
-// test data
-let diet = {
-  first_name: "Jane",
-  last_name: "Appleseed",
-  height_cm: 163,
-  weight_kg: 57,
-  daily_goal: 1500
-};
+// map through data_points array
+// reduce nf_calories to single number
+
+// Profile is just displaying information, so logic may not be necessary in here, extract later
+// Data (diet/intake) can be pulled in the parent, then values passed to here
 
 const Profile = () => {
+  const { data_points } = diet;
+  console.log(data_points);
+
+  let day = 1;
+  let total = data_points[day].intake_list.reduce((acc, current) => {
+    return acc + current.nf_calories;
+  }, 0);
+
+  console.log(total);
+
   return (
     <section className="profile">
       <h1>Profile</h1>
@@ -22,7 +30,7 @@ const Profile = () => {
       </div>
 
       <div className="profile-details">
-        <p>0 consumed</p>
+        <p>{total} cal consumed</p>
         <p>{diet.daily_goal} daily goal</p>
       </div>
 
