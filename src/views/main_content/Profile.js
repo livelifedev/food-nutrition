@@ -12,11 +12,21 @@ const Profile = () => {
   console.log(data_points);
 
   let day = 1;
-  let total = data_points[day].intake_list.reduce((acc, current) => {
-    return acc + current.nf_calories;
-  }, 0);
+  let mealMap = data_points[day].intake_list.reduce((acc, current) => {
+    if (!acc[current.meal_type]) {
+      acc[current.meal_type] = current.nf_calories;
+    } else {
+      acc[current.meal_type] += current.nf_calories;
+    }
+    if (!acc["total"]) {
+      acc["total"] = current.nf_calories;
+    } else {
+      acc["total"] += current.nf_calories;
+    }
+    return acc;
+  }, {});
 
-  console.log(total);
+  console.log(mealMap);
 
   return (
     <section className="profile">
@@ -30,15 +40,15 @@ const Profile = () => {
       </div>
 
       <div className="profile-details">
-        <p>{total} cal consumed</p>
+        <p>{mealMap.total} cal consumed</p>
         <p>{diet.daily_goal} daily goal</p>
       </div>
 
       <div className="profile-log">
-        <p>0 Breakfast</p>
-        <p>0 Lunch</p>
-        <p>0 Dinner</p>
-        <p>0 Snack</p>
+        <p>{mealMap.breakfast} cal Breakfast</p>
+        <p>{mealMap.lunch} cal Lunch</p>
+        <p>{mealMap.dinner} cal Dinner</p>
+        <p>{mealMap.snack} cal Snack</p>
       </div>
     </section>
   );
