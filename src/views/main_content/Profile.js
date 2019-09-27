@@ -29,7 +29,8 @@ const Profile = ({ day, handleNext, handleBack }) => {
 
   return (
     <>
-      <button onClick={handleNext}>Click</button>
+      <button onClick={handleBack}>Previous day</button>
+      <button onClick={handleNext}>Next day</button>
       <section className="profile">
         <h1>Profile</h1>
         <div className="profile-summary">
