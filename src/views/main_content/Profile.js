@@ -1,17 +1,9 @@
 import React from "react";
-import diet from "../../data/mock-data";
 
-// map through data_points array
-// reduce nf_calories to single number
+const Profile = ({ diet, dailyData, day, handleNext, handleBack }) => {
+  console.log(dailyData);
 
-// Profile is just displaying information, so logic may not be necessary in here, extract later
-// Data (diet/intake) can be pulled in the parent, then values passed to here
-
-const Profile = ({ day, handleNext, handleBack }) => {
-  const { data_points } = diet;
-  console.log(data_points);
-
-  let mealMap = data_points[day].intake_list.reduce((acc, current) => {
+  let mealMap = dailyData[day].intake_list.reduce((acc, current) => {
     if (!acc[current.meal_type]) {
       acc[current.meal_type] = current.nf_calories;
     } else {
