@@ -3,7 +3,7 @@ import React from "react";
 const Profile = ({ diet, dailyData, day, handleNext, handleBack }) => {
   console.log(dailyData);
 
-  let mealMap = dailyData[day].intake_list.reduce((acc, current) => {
+  const mealMap = dailyData[day].intake_list.reduce((acc, current) => {
     if (!acc[current.meal_type]) {
       acc[current.meal_type] = current.nf_calories;
     } else {
