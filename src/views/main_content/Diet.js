@@ -1,11 +1,13 @@
 import React from "react";
 
 const Diet = ({ dailyData, day }) => {
-  console.log(dailyData[1].intake_list);
+  console.log("intake list", dailyData[1].intake_list);
 
   const IntakeList = ({ day }) => {
     const list = dailyData[day].intake_list.map(item => (
-      <li key={item.food_name}>{item.food_name}</li>
+      <li key={item.food_name}>
+        {item.food_name} {item.serving_size} {item.serving_unit}
+      </li>
     ));
     return <ul>{list}</ul>;
   };

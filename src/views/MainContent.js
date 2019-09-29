@@ -6,14 +6,23 @@ import diet from "../data/mock-data";
 const MainContent = () => {
   const { data_points } = diet;
   const [day, setDay] = useState(0);
+  const cycle = (direction, day, array) => {
+    if (direction === "next") {
+      day < array.length - 1 ? setDay(day + 1) : setDay(array.length - 1);
+    }
+    if (direction === "back") {
+      day > 0 ? setDay(day - 1) : setDay(0);
+    }
+  };
+
   return (
     <div className="main-content">
       <Profile
         diet={diet}
         dailyData={data_points}
         day={day}
-        handleNext={() => setDay(day + 1)}
-        handleBack={() => setDay(day - 1)}
+        handleNext={() => cycle("next", day, data_points)}
+        handleBack={() => cycle("back", day, data_points)}
       />
       <Diet dailyData={data_points} day={day} />
     </div>

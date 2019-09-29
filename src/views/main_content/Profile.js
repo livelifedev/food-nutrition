@@ -1,7 +1,7 @@
 import React from "react";
 
 const Profile = ({ diet, dailyData, day, handleNext, handleBack }) => {
-  console.log(dailyData);
+  console.log("daily data", dailyData);
 
   const mealMap = dailyData[day].intake_list.reduce((acc, current) => {
     if (!acc[current.meal_type]) {
@@ -17,7 +17,7 @@ const Profile = ({ diet, dailyData, day, handleNext, handleBack }) => {
     return acc;
   }, {});
 
-  console.log(mealMap);
+  console.log("meal map", mealMap);
 
   return (
     <>
