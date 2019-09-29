@@ -1,10 +1,9 @@
 import React from "react";
 
-const Diet = ({ dailyData }) => {
+const Diet = ({ dailyData, day }) => {
   console.log(dailyData[1].intake_list);
 
-  const IntakeList = () => {
-    const day = 1;
+  const IntakeList = ({ day }) => {
     const list = dailyData[day].intake_list.map(item => (
       <li key={item.food_name}>{item.food_name}</li>
     ));
@@ -14,7 +13,7 @@ const Diet = ({ dailyData }) => {
   return (
     <section>
       <h1>Intake</h1>
-      <IntakeList />
+      <IntakeList day={day} />
     </section>
   );
 };

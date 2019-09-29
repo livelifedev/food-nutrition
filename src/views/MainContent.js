@@ -15,7 +15,7 @@ const MainContent = () => {
         handleNext={() => setDay(day + 1)}
         handleBack={() => setDay(day - 1)}
       />
-      <Diet dailyData={data_points} />
+      <Diet dailyData={data_points} day={day} />
     </div>
   );
 };
