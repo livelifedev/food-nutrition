@@ -8,10 +8,10 @@ const MainContent = () => {
   const [day, setDay] = useState(0);
   const cycle = (direction, day, array) => {
     if (direction === "next") {
-      day < array.length - 1 ? setDay(day + 1) : setDay(array.length - 1);
+      day > 0 ? setDay(day - 1) : setDay(0);
     }
     if (direction === "back") {
-      day > 0 ? setDay(day - 1) : setDay(0);
+      day < array.length - 1 ? setDay(day + 1) : setDay(array.length - 1);
     }
   };
 

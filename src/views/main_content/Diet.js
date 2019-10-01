@@ -1,7 +1,7 @@
 import React from "react";
 
 const Diet = ({ dailyData, day }) => {
-  console.log("intake list", dailyData[1].intake_list);
+  console.log("intake list", dailyData[day].intake_list);
 
   const IntakeList = ({ day }) => {
     const list = dailyData[day].intake_list.map(item => (
@@ -21,5 +21,3 @@ const Diet = ({ dailyData, day }) => {
 };
 
 export default Diet;
-
-// serving size is how many they are served/intake amount
