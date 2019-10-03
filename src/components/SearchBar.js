@@ -1,24 +1,37 @@
 import React, { useState } from "react";
+import { requestFood } from "../utils/api";
 
 const SearchBar = () => {
   const [state, setState] = useState("");
-  console.log("search state", state);
+  const [food, setFood] = useState([]);
+  console.log("search state", state, state.length);
+  console.log("food state", food);
+
   return (
-    <input
-      type="text"
-      name="search-bar"
-      id="search-bar"
-      placeholder="Search foods..."
-      value={state}
-      onChange={e => {
-        setState(e.target.value);
-        if (state.length > 2) {
-          console.log("searching..");
-          // get call to api
-          // what to do with data? where to store?
-        }
+    <form
+      onSubmit={e => {
+        e.preventDefault();
+        requestFood();
       }}
-    />
+    >
+      <input
+        type="text"
+        name="search-bar"
+        id="search-bar"
+        placeholder="Search foods..."
+        value={state}
+        onChange={async e => {
+          const query = e.target.value;
+          setState(query);
+
+          if (query.length > 2) {
+            console.log("searching..");
+            const results = await requestFood(query);
+            setFood([...results.common, ...results.branded]);
+          }
+        }}
+      />
+    </form>
   );
 };
 
