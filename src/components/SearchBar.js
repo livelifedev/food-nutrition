@@ -8,32 +8,26 @@ const SearchBar = () => {
   console.log("search state", state, state.length);
   console.log("food state", food);
 
+  const onSearchSubmit = async e => {
+    e.preventDefault();
+    if (state.length > 0) {
+      const results = await requestFood(state);
+      setFood([...results.common, ...results.branded]);
+    } else {
+      setFood([]);
+    }
+  };
+
   return (
     <>
-      <form
-        onSubmit={e => {
-          e.preventDefault();
-          requestFood();
-        }}
-      >
+      <form onSubmit={onSearchSubmit}>
         <input
           type="text"
           name="search-bar"
           id="search-bar"
           placeholder="Search foods..."
           value={state}
-          onChange={async e => {
-            const query = e.target.value;
-            setState(query);
-
-            if (query.length > 2) {
-              console.log("searching..");
-              const results = await requestFood(query);
-              setFood([...results.common, ...results.branded]);
-            } else {
-              setFood([]);
-            }
-          }}
+          onChange={e => setState(e.target.value)}
         />
       </form>
       <FoodDisplay food={food} />

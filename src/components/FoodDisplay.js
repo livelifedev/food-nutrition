@@ -5,7 +5,7 @@ const FoodDisplay = ({ food }) => {
     <>
       <ul>
         {food.map(item => {
-          const id = `id-${item.food_name.replace(" ", "")}`;
+          const id = `id-${item.food_name.replace(" ", "-")}`;
           return <li key={id}>{item.food_name}</li>;
         })}
       </ul>
