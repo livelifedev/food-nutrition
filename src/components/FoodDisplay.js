@@ -1,8 +1,11 @@
 import React from "react";
+import { requestFoodDetails } from "../utils/api";
 
+// api call to get food nutrition
 const FoodDisplay = ({ food }) => {
-  const openFoodDetails = food => {
+  const openFoodDetails = async food => {
     console.log("click", food);
+    await requestFoodDetails(food);
   };
 
   return (
