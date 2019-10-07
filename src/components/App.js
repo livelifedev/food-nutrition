@@ -1,12 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "../views/Header";
 import MainContent from "../views/MainContent";
+import TodaysIntakeContext from "../contexts/TodaysIntakeContext";
 
 const App = () => {
+  const todaysIntakeHook = useState([]);
   return (
     <>
-      <Header />
-      <MainContent />
+      <TodaysIntakeContext.Provider value={todaysIntakeHook}>
+        <Header />
+        <MainContent />
+      </TodaysIntakeContext.Provider>
     </>
   );
 };

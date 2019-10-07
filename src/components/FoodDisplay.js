@@ -1,5 +1,6 @@
 import React from "react";
 import { requestFoodDetails } from "../utils/api";
+import FoodDetails from "../components/FoodDetails"; //use portal to load as modal
 
 // api call to get food nutrition
 const FoodDisplay = ({ food }) => {
@@ -20,6 +21,7 @@ const FoodDisplay = ({ food }) => {
           );
         })}
       </ul>
+      <FoodDetails />
     </>
   );
 };
