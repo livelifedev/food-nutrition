@@ -1,30 +1,54 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import TodaysIntakeContext from "../contexts/TodaysIntakeContext";
 
-const FoodDetails = () => {
-  // servings need to be adjustable
-  // grams and calories get recalculated to servings
-  // load item photo, item.photo render to page
-  const [state, setState] = useState("breakfast");
+// Food nutrients API call data passed in here
+const FoodDetails = ({ foodDetails }) => {
+  console.log("Props foodDetails", foodDetails);
+  // Destructure data from foodDetails
+  const {
+    nix_item_id,
+    food_name,
+    serving_qty,
+    serving_weight_grams,
+    nf_calories,
+    serving_size,
+    thumb
+  } = foodDetails;
+
+  const [state, setState] = useState({
+    nix_item_id,
+    food_name,
+    serving_qty,
+    serving_weight_grams,
+    nf_calories,
+    serving_size,
+    thumb,
+    meal_type: "breakfast"
+  });
+
+  // Todays intake list state which lives in App
+  const [todaysIntake, setTodaysIntake] = useContext(TodaysIntakeContext);
 
   return (
     <>
       <form>
-        <h2>Cheese</h2>
+        <h2>{state.food_name}</h2>
         <label>Servings</label>
-        <input value={"1.0"} readOnly />
+        <input value={state.serving_qty} readOnly />
 
-        <input value={"28"} readOnly />
+        <input value={state.serving_weight_grams} readOnly />
         <label>grams</label>
 
-        <input value={"113"} readOnly />
+        <input value={state.nf_calories} readOnly />
         <label>calories</label>
 
         <div>
           <label htmlFor="meal-type">ADD TO TODAY</label>
           <select
             id="meal-type"
-            value={state}
-            onChange={e => setState(e.target.value)}
+            name="meal-type"
+            value={state.meal_type}
+            onChange={e => setState({ ...state, meal_type: e.target.value })}
           >
             <option value="breakfast">Breakfast</option>
             <option value="lunch">Lunch</option>
@@ -33,7 +57,15 @@ const FoodDetails = () => {
           </select>
         </div>
 
-        <button>ADD</button>
+        <button
+          onClick={e => {
+            e.preventDefault();
+
+            setTodaysIntake([...todaysIntake, state]);
+          }}
+        >
+          ADD
+        </button>
       </form>
     </>
   );

@@ -1,12 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { requestFoodDetails } from "../utils/api";
 import FoodDetails from "../components/FoodDetails"; //use portal to load as modal
 
-// api call to get food nutrition
 const FoodDisplay = ({ food }) => {
+  const [foodDetails, setFoodDetails] = useState([]);
+  const [showFoodDetails, setShowFoodDetails] = useState(false);
+
+  // API call to get food nutrition
   const openFoodDetails = async food => {
     console.log("click", food);
-    await requestFoodDetails(food);
+    const res = await requestFoodDetails(food);
+    setFoodDetails(res.foods[0]);
+    setShowFoodDetails(true);
   };
 
   return (
@@ -21,7 +26,7 @@ const FoodDisplay = ({ food }) => {
           );
         })}
       </ul>
-      <FoodDetails />
+      {showFoodDetails ? <FoodDetails foodDetails={foodDetails} /> : null}
     </>
   );
 };

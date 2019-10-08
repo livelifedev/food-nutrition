@@ -5,8 +5,6 @@ import FoodDisplay from "../components/FoodDisplay";
 const SearchBar = () => {
   const [state, setState] = useState("");
   const [food, setFood] = useState([]);
-  console.log("search state", state, state.length);
-  console.log("food state", food);
 
   const onSearchSubmit = async e => {
     e.preventDefault();

@@ -9,7 +9,7 @@ export const requestFood = async query => {
     }
   });
   const data = await response.json();
-  console.log(data);
+  console.log("API requestFood", data);
   return data;
 };
 
@@ -25,6 +25,6 @@ export const requestFoodDetails = async query => {
     body: JSON.stringify({ query })
   });
   const data = await response.json();
-  console.log(data);
+  console.log("API requestFoodDetails", data);
   return data;
 };

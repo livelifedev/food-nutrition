@@ -5,6 +5,7 @@ import TodaysIntakeContext from "../contexts/TodaysIntakeContext";
 
 const App = () => {
   const todaysIntakeHook = useState([]);
+  console.log("test update", todaysIntakeHook[0]);
   return (
     <>
       <TodaysIntakeContext.Provider value={todaysIntakeHook}>
