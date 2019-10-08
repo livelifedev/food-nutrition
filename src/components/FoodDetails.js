@@ -25,6 +25,12 @@ const FoodDetails = ({ foodDetails }) => {
     meal_type: "breakfast"
   });
 
+  // TODO: split these into own state
+  // meal_type
+  // serving_weight_grams
+  // serving_size
+  // nf_calories
+
   // Todays intake list state which lives in App
   const [todaysIntake, setTodaysIntake] = useContext(TodaysIntakeContext);
 
