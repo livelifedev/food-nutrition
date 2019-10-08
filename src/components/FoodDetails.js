@@ -11,7 +11,6 @@ const FoodDetails = ({ foodDetails }) => {
     serving_qty,
     serving_weight_grams,
     nf_calories,
-    serving_size,
     thumb
   } = foodDetails;
 
@@ -21,25 +20,64 @@ const FoodDetails = ({ foodDetails }) => {
     serving_qty,
     serving_weight_grams,
     nf_calories,
-    serving_size,
     thumb,
+    serving_size: 1,
     meal_type: "breakfast"
   });
 
   // Todays intake list state which lives in App
   const [todaysIntake, setTodaysIntake] = useContext(TodaysIntakeContext);
 
+  // TODO: Extract out logic into a function/utility
+  // Might be better to turn input fields into a custom reusable hook
   return (
     <>
       <form>
         <h2>{state.food_name}</h2>
         <label>Servings</label>
-        <input value={state.serving_qty} readOnly />
+        <input
+          type="number"
+          step={0.1}
+          value={parseFloat(state.serving_size).toFixed(1)}
+          onChange={e => {
+            const newValue = e.target.value;
+            setState(prevInputState => ({
+              ...prevInputState,
+              serving_size: parseFloat(newValue)
+            }));
+          }}
+        />
 
-        <input value={state.serving_weight_grams} readOnly />
+        <input
+          value={Math.round(
+            (state.serving_size / state.serving_qty) *
+              state.serving_weight_grams
+          )}
+          onChange={e => {
+            console.log("runnn");
+            const newValue = e.target.value;
+            setState(prevInputState => ({
+              ...prevInputState,
+              serving_weight_grams: newValue
+            }));
+          }}
+          readOnly
+        />
         <label>grams</label>
 
-        <input value={state.nf_calories} readOnly />
+        <input
+          value={Math.round(
+            (state.serving_size / state.serving_qty) * state.nf_calories
+          )}
+          onChange={e => {
+            const newValue = e.target.value;
+            setState(prevInputState => ({
+              ...prevInputState,
+              nf_calories: newValue
+            }));
+          }}
+          readOnly
+        />
         <label>calories</label>
 
         <div>
